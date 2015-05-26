@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- 
+     Copyright (C) 2011  ANDRES DOMINGUEZ
+
+    Este programa es software libre: usted puede redistribuirlo y/o modificarlo 
+    bajo los términos de la Licencia Pública General GNU publicada 
+    por la Fundación para el Software Libre, ya sea la versión 3 
+    de la Licencia, o (a su elección) cualquier versión posterior.
+
+    Este programa se distribuye con la esperanza de que sea útil, pero 
+    SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
+    MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
+    Consulte los detalles de la Licencia Pública General GNU para obtener 
+    una información más detallada. 
+
+    Debería haber recibido una copia de la Licencia Pública General GNU 
+    junto a este programa. 
+    En caso contrario, consulte <http://www.gnu.org/licenses/>.
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<!-- Estilos -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="shortcut icon" href="../resources/img/favicon.ico" />
+	<link type="text/css" rel="stylesheet" href="../resources/ccs/styles.css" />
+	<script src="../resources/js/load.js" type="text/javascript"></script>
+    <script src="../resources/js/despresados.js" type="text/javascript"></script>
+    <link href="../resources/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	<title>ENTRADA A DESPRESADOS</title>
+</h:head>
+<h:body>
+
+	<h:form id="formdespresar">
+		<f:view>
+			<div id="content">  
+				<!-- Div para colocar botones -->
+				<div class="botonera" style="margin-left:15px; margin-top:15px">    
+			      <p:menuButton value="Menu" >
+				  <p:menuitem value="Presupuestos" url="index.xhtml" icon="ui-icon-calculator"/>
+		          <p:menuitem value="Entrada Despresados" url="despresados.xhtml" icon="ui-icon-gear"/>
+			      </p:menuButton>         
+                  <p:commandButton update="tbResult, panel, growl, paneldiasdes" accesskey="r" id="btnEl" action="#{despresados.delete}" 
+                  value="Borrar" icon="ui-icon-trash" title="Borrar">
+                  <f:param name="requireValidationGrp1" value="1"/>
+                  </p:commandButton>
+                  <p:commandButton icon="ui-icon-arrowrefresh-1-s" update="tbResult, panel, growl, paneldiasdes" process="@this"
+                  title="Refrescar"  accesskey="l" action="#{despresados.reset}">  
+                  <p:resetInput target="panel, tbResult, paneldiasdes" />
+                  <f:actionListener binding="#{utils.setAlmacenO('')}"/>
+                  <f:actionListener binding="#{utils.setAnocon('')}"/>
+                  <f:actionListener binding="#{utils.setMescon('')}"/>
+                  <f:actionListener binding="#{utils.setSemcon('')}"/>
+                  </p:commandButton>    
+                   <p:commandButton title="Salir" icon="ui-icon-power" value="Salir" action="#{loginBean.logout}" />                                 
+				 </div>
+			 
+				<!-- Div para mensajes -->
+				<div class="loader"><ui:include src="common/loader1.xhtml"/></div>
+				<p:growl id="growl" life="#{utils.msg}"/>  
+	
+				<!-- Panel -->
+			<div id="etiqueta">
+			    <p:panel id="panel"  header="Carga de presupuestos de produccion" toggleable="true" >	
+			    <p:tabView id="tabView" style="height:350px;">  
+			<p:tab title="Programacion de entrada a despresados" >
+			<h:panelGrid columns="3"> 
+				 <h:outputText value="Almacen origen:"/>
+			     <p:autoComplete id="codalm_o" value="#{despresados.codalm_o}" completeMethod="#{despresados.completeALMACENES}" emptyMessage="No hay registros"  dropdown="true" scrollHeight="250" required="#{param['requireValidationGrp3'] == '1'}" requiredMessage="Campo requerido">
+			     <p:ajax event="itemSelect" update=":formdespresar:tbResult" listener="#{utils.setAlmacenO(despresados.codalm_o)}"/>
+			     </p:autoComplete>
+			     <p:message for="codalm_o"/>
+			     <h:outputText value="Almacen destino:"/>
+			     <p:autoComplete id="codalm_d" value="#{despresados.codalm_d}" completeMethod="#{despresados.completeALMACENES}" emptyMessage="No hay registros"  dropdown="true" scrollHeight="250" required="#{param['requireValidationGrp3'] == '1'}" requiredMessage="Campo requerido">
+			     <p:ajax event="itemSelect" update=":formdespresar:tbResult" />
+			     </p:autoComplete>
+			     <p:message for="codalm_d"/>
+			     <h:outputText value="Unidad: *"/>
+		         <p:autoComplete id="unidaddes" value="#{despresados.unidaddes}" completeMethod="#{despresados.completeESCALA}" emptyMessage="No hay registros"  dropdown="true" scrollHeight="250" required="#{param['requireValidationGrp3'] == '1'}" requiredMessage="Campo requerido">
+			     </p:autoComplete>
+			     <p:message for="unidaddes"/>
+		         <h:outputText value="Peso promedio: *" />
+			     <p:inputText id="pesopdes"  maxlength="10" style="height:20px" value="#{despresados.pesopdes}" required="#{param['requireValidationGrp3'] == '1'}"  requiredMessage="Campo requerido"/> 	
+		         <p:message for="pesopdes"/>
+			     <h:outputText value="Año Fiscal: *" />
+			     <p:autoComplete id="anocondes" value="#{despresados.anocondes}" completeMethod="#{despresados.completeANOCON}" emptyMessage="No hay registros"  dropdown="true" scrollHeight="250" required="#{param['requireValidationGrp3'] == '1'}" requiredMessage="Campo requerido">
+			     <p:ajax event="itemSelect" update=":formdespresar:tbResult" listener="#{utils.setAnocon(despresados.anocondes)}"/>
+			     </p:autoComplete>
+			     <p:message for="anocondes"/>	
+			     <h:outputText value="Mes Fiscal: *" />
+			     <p:autoComplete id="mescondes" value="#{despresados.mescondes}" completeMethod="#{despresados.completeMESCON}" emptyMessage="No hay registros"  dropdown="true" scrollHeight="250" required="#{param['requireValidationGrp3'] == '1'}" requiredMessage="Campo requerido">
+			     <p:ajax event="itemSelect"  update=":formdespresar:tbResult" listener="#{utils.setMescon(despresados.mescondes)}"/>
+			     </p:autoComplete>
+			     <p:message for="mescondes"/> 
+		         <h:outputText value="Semana Fiscal: *" />
+			     <p:autoComplete id="semcondes" value="#{despresados.semcondes}" completeMethod="#{despresados.completeSEMCON}" emptyMessage="No hay registros"  dropdown="true" scrollHeight="250" required="#{param['requireValidationGrp3'] == '1'}" requiredMessage="Campo requerido">
+			     <p:ajax event="itemSelect" update=":formdespresar:tbResult" listener="#{utils.setSemcon(despresados.semcondes)}"/>
+			     </p:autoComplete>
+			     <p:message for="semcondes"/> 	
+			     <h:outputLabel value=""/>
+		         <p:commandButton onclick="PF('diasdes').show();" value ="Dias" title="Dias" icon="ui-icon-calendar"></p:commandButton>
+		         <h:outputLabel value=""/>
+		         </h:panelGrid>
+		         <h:inputHidden id="vop" value="#{despresados.validarOperacion}"/>
+			</p:tab>    
+			</p:tabView>          
+	           </p:panel>
+			</div>
+
+		<div id="tablaresult">
+			<p:dataTable id="tbResult" emptyMessage="No se encontro ningun registro. Intente de nuevo!" var="tb"  value="#{despresados.lazyModel}" lazy="true" sortBy = "mescon"  
+			paginator="true" paginatorAlwaysVisible="false" rows="15" rowsPerPageTemplate="5,10,15,20,50,100,500" paginatorPosition="top"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} &#160;&#160; {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+			currentPageReportTemplate=" {currentPage} - {totalPages} de #{despresados.rows}" widgetVar="global">
+			
+			<f:facet name="header"> 			
+            <p:outputPanel>  
+              <h:outputText value="Búsqueda rápida" />&#160;&#160;  
+                <p:inputText id="globalFilter" onkeyup="PF('global').filter()"  style="width:150px" /> 
+                <p:tooltip for="globalFilter" value="Escriba aqui para filtrar" showEffect="fade" hideEffect="fade" />  
+                <p:watermark for="globalFilter"  value="Filtrar" /> &#160;&#160;
+            </p:outputPanel>         
+            </f:facet> 
+            
+            <p:column sortBy="#{tb.zcodalm_o}" styleClass="wrap" style="width:200px">  
+            <f:facet name="header">Almacen Origen</f:facet> 
+            <h:outputLabel value="#{tb.zcodalm_o}"/>  
+            </p:column>
+            
+            <p:column sortBy="#{tb.zcodalm_d}" styleClass="wrap" style="width:200px">  
+            <f:facet name="header">Almacen Destino</f:facet> 
+            <h:outputLabel value="#{tb.zcodalm_d}"/>  
+            </p:column>    
+             
+            <p:column sortBy="#{tb.zanocondes}" styleClass="wrap" style="width:45px">  
+            <f:facet name="header">Año</f:facet> 
+            <h:outputLabel value="#{tb.zanocondes}"/>  
+            </p:column>  
+            
+            <p:column sortBy="#{tb.zmescondes}" styleClass="wrap" style="width:45px">  
+            <f:facet name="header">Mes</f:facet> 
+            <h:outputLabel value="#{tb.zmescondes}"/>  
+            </p:column>  
+             
+            <p:column sortBy="#{tb.zsemcondes}" styleClass="wrap" style="width:70px">  
+            <f:facet name="header">Semana</f:facet>  
+            <h:outputLabel value="#{tb.zsemcondes}" />  
+            </p:column> 
+            
+            <p:column sortBy="#{tb.zdia1}" styleClass="wrap" style="width:70px">  
+            <f:facet name="header">Lunes</f:facet> 
+            <h:outputLabel value="#{tb.zdia1}"/>  
+            </p:column> 
+            
+            <p:column sortBy="#{tb.zdia2}" styleClass="wrap" style="width:70px">  
+            <f:facet name="header">Martes</f:facet> 
+            <h:outputLabel value="#{tb.zdia2}"/>  
+            </p:column> 
+            
+            <p:column sortBy="#{tb.zdia3}" styleClass="wrap" style="width:75px">  
+            <f:facet name="header">Miercoles</f:facet> 
+            <h:outputLabel value="#{tb.zdia3}"/>  
+            </p:column> 
+            
+            <p:column sortBy="#{tb.zdia4}" styleClass="wrap" style="width:70px">  
+            <f:facet name="header">Jueves</f:facet> 
+            <h:outputLabel value="#{tb.zdia4}"/>  
+            </p:column> 
+            
+            <p:column sortBy="#{tb.zdia5}" styleClass="wrap" style="width:70px">  
+            <f:facet name="header">Viernes</f:facet> 
+            <h:outputLabel value="#{tb.zdia5}"/>  
+            </p:column> 
+             
+            <p:column style="width:40px" >  
+            <f:facet name="header">Editar</f:facet>              
+            <p:commandLink 
+            styleClass="edit"  
+            onclick="enviar('#{tb.zalmadesc_o}','#{tb.zalmadesc_d}','#{tb.zunidaddes}','#{tb.zpesopdes}','#{tb.zanocondes}','#{tb.zmescondes}','#{tb.zsemcondes}', '1','#{tb.zdia1}','#{tb.zdia2}','#{tb.zdia3}','#{tb.zdia4}','#{tb.zdia5}','#{tb.zdia6}','#{tb.zdia7}')" 
+            title="Enviar"
+            immediate="true"
+            ><i class="fa fa-pencil-square-o fa-2x"></i></p:commandLink>
+            </p:column> 
+                                
+            <p:column style="width:15px" >  
+            <f:facet  name="header">
+            <input type="checkbox"  onclick="fm_check('toDelete',true)"/>
+            </f:facet>  
+            <input type="checkbox" name="toDelete"  value="#{tb.zcodigo_o}#{tb.zcodigo_d}#{tb.zanocondes}#{tb.zmescondes}#{tb.zsemcondes}"/>
+            </p:column>  
+
+            <f:facet name="footer">
+             Registros:  #{despresados.rows} 
+            </f:facet> 
+            </p:dataTable>  
+           </div>
+          </div>
+		</f:view>
+		
+		<!-- Dialogo para almacenar los datos de cada uno de los dias para las entradas a despresados -->
+		
+	<p:dialog header="Dias de la semana" id="diasdes" showEffect="fade" hideEffect="fade" widgetVar="diasdes" modal="true" position="center top" fitviewport="true" height="50%">
+		<p:panelGrid id="paneldiasdes" columns="3" cellpadding="2">
+			<h:outputText value="Lunes:" />
+		 <p:inputText id="dialundes" value="#{despresados.dialun}" style="width:100%" type="number" maxlength="10" required="#{param['requireValidationGrp3'] == '1'}"  requiredMessage="Campo requerido"/>
+		 <p:message for="dialundes"/>	 
+		 <h:outputText value="Martes:" />
+		 <p:inputText id="diamardes" value="#{despresados.diamar}" style="width:100%" type="number" maxlength="10" required="#{param['requireValidationGrp3'] == '1'}"  requiredMessage="Campo requerido"/>
+		 <p:message for="diamardes"/>	
+		 <h:outputText value="Miercoles:" />
+		 <p:inputText id="diamiedes" value="#{despresados.diamie}" style="width:100%" type="number" maxlength="10" required="#{param['requireValidationGrp3'] == '1'}"  requiredMessage="Campo requerido"/>
+		 <p:message for="diamiedes"/>	
+		 <h:outputText value="Jueves:" />
+		 <p:inputText id="diajuedes" value="#{despresados.diajue}" style="width:100%" type="number" maxlength="10" required="#{param['requireValidationGrp3'] == '1'}"  requiredMessage="Campo requerido"/>
+		 <p:message for="diajuedes"/>	
+		 <h:outputText value="Viernes:" />
+		 <p:inputText id="diaviedes" value="#{despresados.diavie}" style="width:100%" type="number" maxlength="10" required="#{param['requireValidationGrp3'] == '1'}"  requiredMessage="Campo requerido"/>
+		 <p:message for="diaviedes"/>	
+		 <h:outputText value="Sabado:" />
+		 <p:inputText id="diasabdes" value="#{despresados.diasab}" style="width:100%" type="number" maxlength="10" required="#{param['requireValidationGrp3'] == '1'}"  requiredMessage="Campo requerido"/>
+		 <p:message for="diasabdes"/>	
+		 <h:outputText value="Domingo:" />
+		 <p:inputText id="diadomdes" value="#{despresados.diadom}" style="width:100%" type="number" maxlength="10" required="#{param['requireValidationGrp3'] == '1'}"  requiredMessage="Campo requerido"/>
+		 <p:message for="diadomdes"/>
+		</p:panelGrid>
+		<p:commandButton value="Guardar" title="Guardar" icon="ui-icon-disk" styleClass="botonUn" action="#{despresados.despresar}" update=":formdespresar:paneldiasdes, :formdespresar:tbResult, :formdespresar:panel, :formdespresar:growl" onclick="PF('diasdes').hide();">
+           <f:param name="requireValidationGrp1" value="1" />
+		   <f:param name="requireValidationGrp3" value="1" />
+		</p:commandButton>
+	</p:dialog>
+	</h:form>
+</h:body>
+</html>

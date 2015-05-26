@@ -1,0 +1,95 @@
+/* 
+    Document   : btnStyles
+    Created on : 23/04/2009, 11:10:43 PM
+    Author     : Andres
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   Estilos de botoneras
+*/
+
+
+
+.btnImprimir{
+    background: url(../img/printer.png) no-repeat ;
+    border: 0px;
+    height: 22px;
+    width: 22px;
+    margin-left: 3px
+}
+.btnImprimir:hover
+{
+ background: url(../img/printer_active.png) no-repeat ;
+}
+
+
+.btnReload{
+    background: url(../img/reload.png)  no-repeat ;
+    border: 0px;
+    height: 22px;
+    width: 22px;
+    margin-right: 3px
+}
+
+
+.btnInfo{
+    background: url(../img/info.gif) 10px no-repeat ;
+    border: 0px solid #003062;
+    background-color: #F8F8F8;
+    padding: 0px 15px;
+    padding-bottom: 1px;
+    height: 22px;
+    width: 40px;
+
+}
+
+
+.btnSalir{
+ height: 20px;
+ margin-bottom: -4px;
+}
+
+.btnChpwd{
+ height: 15px;
+ margin-bottom: -4px;
+}
+
+.btnirTab{
+    background: url(../img/database_link.png) no-repeat ;
+    border: 0px;
+    height: 22px;
+    width: 22px;
+    margin-left: 3px;
+    margin-bottom: -4px
+}
+.btnirTab:hover
+{
+ height: 23px;
+    width: 23px;
+}
+
+.btnplus{
+    background: url(../img/bullet_toggle_plus.png) 3px no-repeat ;
+    padding: 10px 10px;
+    border: 0px solid gray;
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+}
+
+.btnChiken{
+    background: url(../img/chiken.png) 13px no-repeat ;
+    padding: 0px 0px;
+    border: 0px solid gray;
+    height: 65px;
+    width: 65px;
+    display: inline-block;
+}
+
+
+
+.btnPrint{
+	float: right;
+}

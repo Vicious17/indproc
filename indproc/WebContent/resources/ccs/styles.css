@@ -1,0 +1,297 @@
+	/*
+	    Document   : styles
+	    Created on : 12/04/2009, 09:01:08 PM
+	    Author     : Andres
+	    Description:
+	        Purpose of the stylesheet follows.
+	*/
+	
+	/*
+	   TODO customize this sample style
+	   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+	*/
+	
+	/*
+	   Para Tablas detalle de datos
+	*/
+	
+	html{
+	
+	background: rgb(179,220,237); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(179,220,237,1)), color-stop(50%,rgba(41,184,229,1)), color-stop(100%,rgba(188,224,238,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee',GradientType=0 ); /* IE6-9 */
+	height:100%;width:100%;
+	font-family:Arial, Helvetica, sans-serif; font-size: 12px}
+	
+	body {
+	    font-family: Verdana, Arial, Helvetica, sans-serif;
+	    font-size: 11px;
+	    color: #003062;
+	    margin: 0px;
+	    padding: 0px;
+	    
+	}
+	
+	
+	/********************Tabla del login********************************+*/ 
+    .centered .ui-panel-titlebar {
+      text-align: center
+    }
+
+	#ini{
+		width: 100%;
+	    font-size: 14px;
+	    font-style: italic;
+	    font-weight:  bold; 
+	}
+	
+	#tabla_login{
+	position: absolute !important;
+	float: left;
+	margin-left: 35%;
+    margin-top: 100px;
+    width: 20%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    }
+	
+   .login1{padding-left: 12%}
+	
+   .btnLogin{
+	float: left;
+	width: 80%;
+	margin-left: 10%;
+	height: 40px;
+	margin-bottom: 12px
+}
+
+	#content{width:100%; position:relative }
+	
+	.col1{}
+	.col2{}
+	.colmsg{padding-left:30px;}
+	
+	/**************************************************************************/
+	/*Estilo para botonera*****************************************************/
+	#botonera{
+	    float:left;
+	    padding-bottom: 6px;
+	    height: 35px;
+	    margin-top: 2px;
+	    margin-left: 1%;
+	    white-space: nowrap
+	}
+	
+	.botonUn{
+		margin-left: 2px;
+		height: 35px;
+	}
+	
+	/*Estilo para botonera*****************************************************/
+	
+
+	
+	#loader{
+	    float: right;
+	    width: 1%;
+	    overflow:visible !important;
+	    margin-right: 40px
+	}
+	
+	#etiqueta{
+	position: relative;
+    float: left;
+    width: 98%;
+    margin-right: 1%;
+    margin-left: 1%;
+    margin-bottom: 0.5em;
+    height: auto;
+    white-space: nowrap;
+    margin-top: 0.6em;
+    overflow: visible;
+}
+	
+	
+	#tablaresult{
+	    float: left;
+	    width: 98%;
+	    margin-right: 1%;   
+	    margin-left: 1%
+	}
+	
+		
+	
+	.mnuGlobal:HOVER{
+		background: #ffffff; /* Old browsers */
+		background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+	}
+	
+	/*Estilos para tablas encabezados y formularios********************************/
+	
+/*
+   Tabla resultado
+*/
+   /***Sobrecarga el estilo de primefaces en el datatable************/
+.ui-datatable tr.ui-datatable-odd:hover {
+    background: #D7E6EA;
+}
+
+.ui-datatable tr.ui-datatable-even:hover {
+    background: #D7E6EA;
+}
+
+
+.ui-datatable tr.ui-datatable-even {
+	background: none repeat scroll 0 0 #F5F7F7;
+   font-size: 8pt;
+   font-family: Verdana, Arial, Helvetica, sans-serif;
+   height: 40px;
+   border-color: rgba(111,111,111,0.2)  transparent;
+}
+
+.ui-datatable tr.ui-datatable-odd {
+   font-size: 8pt;
+   font-family: Verdana, Arial, Helvetica, sans-serif;  
+   height: 40px;
+   border-color: rgba(111,111,111,0.2)  transparent;
+}
+
+/***Sobrecarga el estilo de primefaces en el header y footer de un datatable************/
+.ui-datatable .ui-datatable-header,
+.ui-datatable .ui-datatable-footer {
+    text-align:left;
+}
+
+.ui-datatable tbody td.wrap {
+    white-space: normal;
+}
+
+
+
+/***Sobrecarga el estilo de primefaces autocomplete************/
+.ui-autocomplete-input{height:25px}
+
+
+	/***Sobrecarga el estilo de primefaces paginacion************/
+	 .ui-datatable .ui-paginator {
+	     text-align: left;
+	   }
+	
+	
+	
+	/***Sobrecarga el estilo de primefaces growl************/
+	.ui-growl-message {
+		    width:320px;
+	        font-size: 14px;
+	}
+	
+	.ui-growl-message p {  
+	        font-size: 14px
+	}
+	
+	.ui-growl {
+	        width:400px;
+	        z-index:9999;
+	}
+	
+	.ui-growl-title {
+	        font-weight:normal;
+	        color: #003062;
+	        font-style: italic;
+	        padding:0 0 7px 0;
+	        display:block;
+	}
+	
+	
+	.ui-inputfield {
+	    height: 25px;
+	}
+	
+	.ui-inputtextarea{
+	   height: 60px;
+	}
+	
+	
+	.chk {
+	    padding-top: 0px;
+	    padding-bottom: 0px;
+	    margin-top: 0px;
+	    margin-bottom: 0px;
+	    margin-left: 12px;
+	    height: 16px;
+	}
+	
+	.print {
+	    padding-top: 0px;
+	    padding-bottom: 0px;
+	    margin-top: 0px;
+	    margin-bottom: 0px;
+	    margin-left: 6px;
+	    height: 16px;
+	}
+	
+
+	
+	.order:hover{
+		font-style: italic;
+		color: orange;
+	}
+	
+	
+	.botonPrint{
+		height: 25px;
+		width: 30px;
+		margin-bottom: 3px;
+		display: inline-block;
+	}
+	
+	
+	
+
+
+	
+	/*Estilos para imagenes en autoservicio********************************/
+	.imagen{
+	width: 80px;
+	height: 80px;
+	border: 0;
+    }
+     
+	
+	 .ui-datatable .ui-column-filter {
+	    display: none;
+	    width:300px;
+	    margin:auto;
+	}
+	
+	 
+	.ui-autocomplete-panel .ui-autocomplete-list-item {
+	  white-space: nowrap;
+	  font-size: 7.8pt;
+	}
+	
+	.ui-widget-content .ui-datalist-content{
+    border: none;
+    background: transparent;
+    background-image: none;
+    padding:0px 0px;
+    font-size: 7.8pt;
+    }
+	
+	.myLayoutStyleClass .ui-layout-unit-content{
+	
+	
+       }
+       
+

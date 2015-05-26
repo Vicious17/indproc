@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- 
+     Copyright (C) 2011  KREAS TALENTO
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+          
+<h:body>
+<p:idleMonitor timeout="3300000"   
+            onidle="PF('idleDialog').show()" />  
+<p:dialog header="Sessión Inválida" resizable="false" closable="false" 
+            widgetVar="idleDialog" modal="true" width="400"> 
+    <h:outputText value="Su sessión a caduado, por favor vuelva a loguearse" />  <br/><br/>
+    <center><p:commandButton value="INDPROC - LOGIN" action="#{loginBean.logout}"/></center>
+</p:dialog>  
+</h:body>
+</html>
